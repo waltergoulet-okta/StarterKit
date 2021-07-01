@@ -79,11 +79,8 @@ resources.
 ```
 for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform init; cd ..; done
 
-```
 for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform plan -var="name=$vname"; cd ..; done
 
-```
 for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform apply -var="name=$vname" -auto-approve; cd ..; done
 
-```
 for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform destroy -auto-approve; cd ..; done
