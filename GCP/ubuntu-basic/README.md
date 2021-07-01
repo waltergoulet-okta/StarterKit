@@ -71,3 +71,12 @@ Then, run the command `ssh gcp-ubuntu-instance`. This will drop you into an SSH 
 ## Cleaning up
 
 When you're done, you can remove this server with the command `terraform destroy`
+
+## Bulk operations
+If you want to deploy a fleet, each of the inst* directories contain separate plan files. This way you can use a shell command to bulk plan/apply/destroy
+resources.
+
+`for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform init; cd ..; done`
+`for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform plan -var="name=$vname"; cd ..; done`
+`for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform apply -var="name=$vname" -auto-approve; cd ..; done`
+`for dir in */; do echo "$dir"; vname=$(echo "gcp-instance-$dir" | sed -e 's/\///g');  echo $vname; cd $dir; terraform destroy -auto-approve; cd ..; done`
